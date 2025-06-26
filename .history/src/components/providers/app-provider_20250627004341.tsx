@@ -1,12 +1,13 @@
 "use client";
 
-import { Toaster } from "@/components/ui/sonner";
-import { persistor, store } from "@/lib/redux/store";
 import { ThemeProvider } from "@/lib/themes/theme-provider";
+import { store, persistor } from "@/lib/redux/store";
 import { SessionProvider } from "next-auth/react";
 import type React from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import { Toaster } from "@/components/ui/toaster";
+import { NotificationProvider } from "./notification-provider";
 
 interface AppProviderProps {
   children: React.ReactNode;
@@ -19,8 +20,10 @@ export function AppProvider({ children, session }: AppProviderProps) {
       <Provider store={store}>
         <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
           <ThemeProvider>
-            {children}
-            <Toaster />
+            <NotificationProvider>
+              {children}
+              <Toaster />
+            </NotificationProvider>
           </ThemeProvider>
         </PersistGate>
       </Provider>

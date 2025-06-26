@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import type React from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+// import { NotificationProvider } from "./notification-provider";
 
 interface AppProviderProps {
   children: React.ReactNode;
